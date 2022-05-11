@@ -1,7 +1,7 @@
-const withCss = require('@zeit/next-css')
- 
-if (typeof require !== 'undefined') {
-    require.extensions['.css'] = (file) => {}
-}
- 
-module.exports = withCss({})
+const path = require('path')
+
+module.exports = {
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'pages')],
+    },
+};

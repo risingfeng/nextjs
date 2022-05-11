@@ -1,10 +1,13 @@
 // import Head from 'next/head'
 // import Image from 'next/image'
-
+import React from 'react'
+import { Button } from "antd"
+import scss from './index.module.scss';
 export default function Home() {
   return (
-    <div>
+    <Button>
       Home Page
-    </div>
+      <span style={{ color: scss.primaryColor }}>red</span>
+    </Button>
   )
 }

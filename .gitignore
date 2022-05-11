@@ -6,4 +6,5 @@ node_modules
 .DS_Store
 # 忽略jsconfig配置
 # jsconfig.json
+jsconfig.json
 .next
