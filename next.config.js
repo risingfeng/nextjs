@@ -1,7 +1,7 @@
-if (typeof require !== 'undefined') {
-    require.extensions['.css'] = (file) => {}
-}
- 
+const path = require('path')
+
 module.exports = {
-    
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
+    },
 };
