@@ -10,7 +10,7 @@ module.exports = {
         return [
             {
                 source: '/api/zikao/:path*',
-                destination: '/api/zikao/:path*',
+                destination: process.env.APP_ENV === 'dev' ? `${BASEURLS.DEV}/api/zikao/:path*` : `${BASEURLS.PROD}/zikao/:path*`,
             },
         ];
     },
