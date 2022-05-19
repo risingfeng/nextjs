@@ -26,7 +26,7 @@ const request = async ({
     if (!url) throw Error('url must provide')
 
     // 根据hostName 切换不同的baseURL
-    console.log(BASEURLS, host)
+    console.log(BASEURLS, host, '111111111')
     requestConf.url = BASEURLS[host] + url
     if (method.toUpperCase() === 'POST') {
         requestConf.headers = {
@@ -47,12 +47,13 @@ const request = async ({
         })
         }
     }
+    console.log('requestConf=======', requestConf)
     return await axios.request(requestConf).then(res => {
         if (handleRes(res)) {
         if (cacheOptions && cacheOptions.key) {
             cache.put(cacheOptions.key, JSON.stringify(res.data), cacheOptions.ttl || 300000)
         }
-        return res.data
+            return res.data
         }
   })
 }
@@ -63,6 +64,7 @@ const request = async ({
  */
 function handleRes(res) {
   const { status, data: { code }, config } = res
+  console.log('res===handleRes==', res)
   if ((status !== 200 && code !== 20000) ||(code !==200 && status !==200) ) {
     throw Error(JSON.stringify({
       url: config.url,
@@ -95,13 +97,16 @@ const post = async (url, data, host = 'BASEURL') => {
  * @param {BASEURLS} host  根据传入hostname, 来切换不同baseURL
  */
 const get = async (url, params, host = 'BASEURL', cacheOptions) => {
-  return request({
-    url,
-    params,
-    method: 'GET',
-    host,
-    cacheOptions,
-  })
+    console.log('url======', url)
+    console.log('params======', params)
+    console.log('host======', host)
+    return request({
+        url,
+        params,
+        method: 'GET',
+        host,
+        cacheOptions,
+    })
 }
 export default class Base {
   static get = get
