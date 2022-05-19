@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASEURLS } from '../config/constant'
+// import { BASEURLS } from '../config/constant'
 import cache from 'memory-cache'
 
 /**
@@ -26,8 +26,8 @@ const request = async ({
     if (!url) throw Error('url must provide')
 
     // 根据hostName 切换不同的baseURL
-    console.log(BASEURLS, host, '111111111')
-    requestConf.url = BASEURLS[host] + url
+    console.log(url, '111111111')
+    requestConf.url = 'http://localhost:3000' + url
     if (method.toUpperCase() === 'POST') {
         requestConf.headers = {
         'Content-Type': 'application/json;',
@@ -96,6 +96,7 @@ const post = async (url, data, host = 'BASEURL') => {
  * @param {*} params 传入params
  * @param {BASEURLS} host  根据传入hostname, 来切换不同baseURL
  */
+// const get = async (url, params, host = 'BASEURL', cacheOptions) => {
 const get = async (url, params, host = 'BASEURL', cacheOptions) => {
     console.log('url======', url)
     console.log('params======', params)

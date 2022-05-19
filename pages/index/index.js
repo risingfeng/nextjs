@@ -16,7 +16,7 @@ class Index extends Component {
   static async getInitialProps({ req }) {
     console.log('req======', req)
     const seoConfig = seo.getSeoConfigZK()
-    const examPeriodList = await IndexApi.getExamPeriodList({}, 'MOCK')
+    const examPeriodList = await IndexApi.getExamPeriodList({id: 0})
     console.log('examPeriodList=====', examPeriodList)
 
     return {

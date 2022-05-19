@@ -4,8 +4,8 @@ const BASEURL = 'http://192.168.1.5:8190' // 线上地址
 const MOCKURL = 'http://localhost:3000'
 
 const BASEURLS = {
-    BASEURL: dev ? 'http://172.16.117.226:29933': BASEURL, // 测试地址
-    MOCK: MOCKURL,
+    DEV: MOCKURL,
+    PROD: BASEURL,
 }
 
 const categoryAll = [
