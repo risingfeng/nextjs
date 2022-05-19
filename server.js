@@ -12,20 +12,22 @@ app.prepare()
     const server = new Koa()
     const router = new Router()
 
-    router.get('/a', async ctx => {
-        await app.render(ctx.req, ctx.res, '/a', ctx.query)
-        // ctx.respond = false
-    })
-
-    router.get('/b', async ctx => {
-        await app.render(ctx.req, ctx.res, '/b', ctx.query)
-        // ctx.respond = false
+    router.get('/category/:params', async ctx => {
+        const finalPath ='/category'
+        const { params } = ctx.params
+        const listParams = params && params.split('-')
+        if (listParams && listParams.length === 4) {
+          const categoryId = listParams[0]
+          const tagId = listParams[1]
+          const provinceId = listParams[2]
+          const page = listParams[3]
+          await app.render(ctx.req, ctx.res, finalPath, { ...ctx.query, categoryId, tagId, provinceId, page})
+        }
     })
 
     router.get('/', async ctx => {
-        // console.log('ctx======', ctx)
         // await handle(ctx.req, ctx.res)
-        await app.render(ctx.req, ctx.res, '/', ctx.query)
+        await app.render(ctx.req, ctx.res, '/index', ctx.query)
         // ctx.respond = false
     })
 
