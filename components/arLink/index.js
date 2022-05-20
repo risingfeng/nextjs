@@ -7,9 +7,9 @@ const CATEGORYMAP = {
 
 const ArLink = ({
   children,
-  categoryId,
-  tagId = 0,
-  provinceId = 0,
+  categoryId, //  一级项目
+  tagId = 0, // 二级项目
+  provinceId = 0, // 省份id
   page = 1,
   className,
   target,

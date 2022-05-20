@@ -8,7 +8,6 @@ export default function Layout({
     children,
     seoConfig,
     categoryCurrent = [], // 当前位置
-    showSubmenu = 0, // 二级导航
     ...props
 }) {
     return (

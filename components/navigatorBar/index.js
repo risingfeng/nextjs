@@ -1,7 +1,8 @@
 import React, { Component, useState } from "react"
 import ArLink from '../arLink/index'
+import SubMenu from '../subMenu/index'
 
-import { categoryAll }  from '../../config/constant.js'
+import { NAV_LIST }  from '../../config/constant.js'
 
 import styles from './index.module.css'
 
@@ -13,16 +14,29 @@ function Nav(props) {
 
         console.log('categoryCurrent======', categoryCurrent)
 
-        const navlistJSX = categoryAll.map((item) => (
-            <li key={item.categoryId}>
-                <ArLink
-                    categoryId={item.categoryId}
-                    className={styles[`navItem${categoryCurrent && categoryCurrent[0] && +categoryCurrent[0] === +item.categoryId ? ' active' : ''}`]}
-                >
-                    {item.categoryName}
-                </ArLink>
-            </li>
-        ))
+        const navlistJSX = NAV_LIST.map((item) => {
+            const { showSubMenu} = item
+            return (
+                <li key={item.categoryId}>
+                    {showSubMenu
+                    ?
+                    <SubMenu
+                        categoryId={item.categoryId}
+                        item={item}
+                        categoryCurrent={categoryCurrent}
+                    />
+                    :
+                    <ArLink
+                        categoryId={item.categoryId}
+                        className={styles[`navItem${categoryCurrent && categoryCurrent[0] && +categoryCurrent[0] === +item.categoryId ? ' active' : ''}`]}
+                    >
+                        {item.categoryName}
+                    </ArLink>
+                    }
+                   
+                </li>
+            )
+        })
 
         return (
             <ul className={styles.navList}>

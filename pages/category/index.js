@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import Layout from "../../components/layout/index"
 import seo from "../../utils/seo"
 
-import { categoryAll } from '../../config/constant'
+import { NAV_LIST } from '../../config/constant'
 
 import styles from './index.module.css'
 
@@ -17,9 +17,12 @@ class Category extends Component {
   static async getInitialProps({ router }) {
     const seoConfig = seo.getSeoConfigZK()
     const categoryCurrent = [Number(router.query.categoryId)]
+    const tagCurrent = [Number(router.query.tagId)]
+
     return {
       seoConfig,
       categoryCurrent,
+      tagCurrent,
     }
   }
 
@@ -29,6 +32,7 @@ class Category extends Component {
     const {
       seoConfig,
       categoryCurrent,
+      tagCurrent,
     } = this.props
     console.log('this.props======Category==', this.props)
     return (

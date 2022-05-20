@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { BASEURLS } from '../config/constant'
 import cache from 'memory-cache'
 
 /**
@@ -13,7 +12,6 @@ const request = async ({
     params,
     method,
     headers,
-    host,
     cacheOptions,
 }) => {
     const requestConf = {
@@ -26,8 +24,7 @@ const request = async ({
     if (!url) throw Error('url must provide')
 
     // 根据hostName 切换不同的baseURL
-    console.log(url, '111111111')
-    requestConf.url = 'http://localhost:3000' + url
+    requestConf.url = url || 'http://localhost:3000'
     if (method.toUpperCase() === 'POST') {
         requestConf.headers = {
         'Content-Type': 'application/json;',
@@ -47,7 +44,6 @@ const request = async ({
         })
         }
     }
-    console.log('requestConf=======', requestConf)
     return await axios.request(requestConf).then(res => {
         if (handleRes(res)) {
         if (cacheOptions && cacheOptions.key) {
@@ -64,7 +60,6 @@ const request = async ({
  */
 function handleRes(res) {
   const { status, data: { code }, config } = res
-  console.log('res===handleRes==', res)
   if ((status !== 200 && code !== 20000) ||(code !==200 && status !==200) ) {
     throw Error(JSON.stringify({
       url: config.url,
@@ -80,32 +75,25 @@ function handleRes(res) {
  * 
  * @param {*} url  请求uri
  * @param {*} data 传入data
- * @param {BASEURLS} host 根据传入hostname, 来切换不同baseURL
  */
-const post = async (url, data, host = 'BASEURL') => {
+const post = async (url, data) => {
   return request({
     url,
     data,
     method: 'POST',
-    host
   })
 }
 /**
  * 
  * @param {*} url  请求uri
  * @param {*} params 传入params
- * @param {BASEURLS} host  根据传入hostname, 来切换不同baseURL
  */
-// const get = async (url, params, host = 'BASEURL', cacheOptions) => {
-const get = async (url, params, host = 'BASEURL', cacheOptions) => {
-    console.log('url======', url)
-    console.log('params======', params)
-    console.log('host======', host)
+// const get = async (url, params, cacheOptions) => {
+const get = async (url, params, cacheOptions) => {
     return request({
         url,
         params,
         method: 'GET',
-        host,
         cacheOptions,
     })
 }

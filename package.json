@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env APP_ENV=dev node server.js",
+    "dev": "cross-env NEXT_ENV=dev node server.js",
+    "remote": "cross-env NEXT_ENV=remote node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "pro": "npm run build && cross-env NEXT_ENV=prod node server.js"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
